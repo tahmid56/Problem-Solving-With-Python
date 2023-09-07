@@ -52,7 +52,33 @@ class SinglyLinkedList:
             prev = currHead
             currHead = new
         self.head = prev
-            
+
+    #convertion of orientation l0 -> L1 -> ... Ln-1 -> Ln to L0 -> Ln -> L1 -> Ln-1 
+    def reorder(self):
+        slow = self.head
+        fast = self.head.next
+        while(fast and fast.next):
+            slow = slow.next
+            fast = fast.next.next
+        secondHead = slow.next
+        slow.next = None
+
+        prev = None
+        while(secondHead):
+            temp = secondHead.next
+            secondHead.next = prev
+            prev = secondHead
+            secondHead = temp
+        
+        firstHead, secondHead = self.head, prev
+        while(secondHead):
+            tmp1, tmp2 = firstHead.next, secondHead.next
+            firstHead.next = secondHead
+            secondHead.next = tmp1
+            firstHead, secondHead = tmp1, tmp2
+        
+
+
 ll = SinglyLinkedList();
 
 ll.append(5)
@@ -60,7 +86,8 @@ ll.append(6)
 ll.append(1)
 ll.append(10)
 ll.prepend(11)
-ll.reverse()
+# ll.reverse()
+ll.reorder()
 ll.printList()
 
 
