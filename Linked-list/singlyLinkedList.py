@@ -1,19 +1,19 @@
 class Node:
-    def __init__(self, data):
+    def __init__(self, data = 0, next = None):
         self.data = data
-        self.next = None
+        self.next = next
 
 class SinglyLinkedList:
     head = None
     tail = None
     length = 0
 
-    def printList(self):
-        if(self.head==None):
+    def printList(self, head):
+        if(head==None):
             print("The List is Empty!")
             return
         else:
-            headCopy = self.head
+            headCopy = head
             while(headCopy):
                 print(headCopy.data, end=" ")
                 headCopy = headCopy.next
@@ -39,11 +39,12 @@ class SinglyLinkedList:
             return
         newNode.next = self.head
         self.head = newNode
-    
+    #Iterative way
     def reverse(self):
         if(self.head == None):
             print("The list is Empty!")
             return
+        #Iterative way
         prev = None
         currHead = self.head
         while(currHead):
@@ -77,7 +78,16 @@ class SinglyLinkedList:
             secondHead.next = tmp1
             firstHead, secondHead = tmp1, tmp2
         
-
+    def removeElements(self, val):
+        dummy = Node(next=self.head)
+        prev, curr = dummy, self.head
+        while(curr):
+            if(curr.data == val):
+                prev.next = curr.next
+            else:
+                prev = curr
+            curr = curr.next
+        self.printList(dummy.next)
 
 ll = SinglyLinkedList();
 
@@ -85,10 +95,17 @@ ll.append(5)
 ll.append(6)
 ll.append(1)
 ll.append(10)
-ll.prepend(11)
+ll.append(10)
+ll.append(3)
+ll.append(7)
+ll.append(9)
+ll.removeElements(5)
+
+# ll.prepend(11)
 # ll.reverse()
-ll.reorder()
-ll.printList()
+# ll.reorder()
+
+# ll.printList(ll.head)
 
 
 
