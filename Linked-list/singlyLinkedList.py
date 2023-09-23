@@ -104,7 +104,11 @@ class SinglyLinkedList:
         return True
         
         # O(1) space approach
-
+        slow, fast = head, head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        
 
 ll = SinglyLinkedList();
 
