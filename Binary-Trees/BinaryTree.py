@@ -47,8 +47,20 @@ class TreeNode:
                 queue.append(curr.left)
             if(curr.right):
                 queue.append(curr.right)
-            
-
+    
+    def treeIncludesIter(self, root, target):
+        if(root is None):
+            return False
+        queue = [root]
+        while(len(queue) > 0):
+            curr = queue.pop(0)
+            if(curr.data == target):
+                return True
+            if(curr.left):
+                queue.append(curr.left)
+            if(curr.right):
+                queue.append(curr.right)
+        return False
 
 
 tree = TreeNode(5)
@@ -59,4 +71,5 @@ tree.insert(2)
 tree.insert(6)
 # tree.dfsIterative(tree)
 # print(tree.dfsRecursive(tree))
-tree.bfsIterative(tree)
+# tree.bfsIterative(tree)
+print(tree.treeIncludesIter(tree, 9))
