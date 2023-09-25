@@ -48,7 +48,7 @@ class TreeNode:
             if(curr.right):
                 queue.append(curr.right)
     
-    def treeIncludesIter(self, root, target):
+    def treeIncludesIterative(self, root, target):
         if(root is None):
             return False
         queue = [root]
@@ -62,6 +62,12 @@ class TreeNode:
                 queue.append(curr.right)
         return False
 
+    def treeIncludesRecursive(self, root, target):
+        if(root is None):
+            return False
+        if(root.data == target):
+            return True
+        return self.treeIncludesRecursive(root.left, target) or self.treeIncludesRecursive(root.right, target)
 
 tree = TreeNode(5)
 tree.insert(4)
@@ -72,4 +78,5 @@ tree.insert(6)
 # tree.dfsIterative(tree)
 # print(tree.dfsRecursive(tree))
 # tree.bfsIterative(tree)
-print(tree.treeIncludesIter(tree, 9))
+# print(tree.treeIncludesIterative(tree, 9))
+print(tree.treeIncludesRecursive(tree, 7))
