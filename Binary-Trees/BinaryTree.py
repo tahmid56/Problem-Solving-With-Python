@@ -28,11 +28,35 @@ class TreeNode:
             if(curr.left):
                 stack.append(curr.left)
             
+    def dfsRecursive(self, root):
+        arr = []
+        if(root):    
+            arr.append(root.data)
+            arr += self.dfsRecursive(root.left)
+            arr += self.dfsRecursive(root.right)
+        return arr
+    
+    def bfsIterative(self, root):
+        if(root is None):
+            return
+        queue = [root]
+        while(len(queue) > 0):
+            curr = queue.pop(0)
+            print(curr.data)
+            if(curr.left):
+                queue.append(curr.left)
+            if(curr.right):
+                queue.append(curr.right)
+            
+
 
 
 tree = TreeNode(5)
 tree.insert(4)
+tree.insert(3)
 tree.insert(7)
 tree.insert(2)
 tree.insert(6)
-tree.dfsIterative(tree)
+# tree.dfsIterative(tree)
+# print(tree.dfsRecursive(tree))
+tree.bfsIterative(tree)
