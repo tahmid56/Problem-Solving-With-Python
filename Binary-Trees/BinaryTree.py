@@ -69,6 +69,25 @@ class TreeNode:
             return True
         return self.treeIncludesRecursive(root.left, target) or self.treeIncludesRecursive(root.right, target)
 
+    def treeSumIterative(self, root):
+        if(root is None):
+            return 0
+        total = 0
+        stack = [root]
+        while(len(stack)>0):
+            curr = stack.pop(-1)
+            total += curr.data
+            if(curr.right):
+                stack.append(curr.right)
+            if(curr.left):
+                stack.append(curr.left)
+        return total
+    
+    def treeSumRecursive(self, root):
+        if(root is None):
+            return 0
+        return root.data + self.treeSumRecursive(root.left) + self.treeSumRecursive(root.right)
+
 tree = TreeNode(5)
 tree.insert(4)
 tree.insert(3)
@@ -79,4 +98,6 @@ tree.insert(6)
 # print(tree.dfsRecursive(tree))
 # tree.bfsIterative(tree)
 # print(tree.treeIncludesIterative(tree, 9))
-print(tree.treeIncludesRecursive(tree, 7))
+# print(tree.treeIncludesRecursive(tree, 7))
+# print(tree.treeSumIterative(tree))
+print(tree.treeSumRecursive(tree))
