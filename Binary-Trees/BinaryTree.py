@@ -1,3 +1,5 @@
+import math
+
 class TreeNode:
     def __init__(self, data):
         self.left = None
@@ -88,16 +90,43 @@ class TreeNode:
             return 0
         return root.data + self.treeSumRecursive(root.left) + self.treeSumRecursive(root.right)
 
+    def treeMinIterative(self, root):
+        smallest = math.inf
+        if(root is None):
+            return 
+        stack = [root]
+        while(len(stack) > 0):
+            curr = stack.pop(-1)
+            if(curr.data < smallest):
+                smallest = curr.data
+            if(curr.left):
+                stack.append(curr.left)
+            if(curr.right):
+                stack.append(curr.right)
+        return smallest
+
+    def treeMinRecursive(self, root):
+        if(root is None):
+            return math.inf
+        
+        leftMin = self.treeMinRecursive(root.left)
+        rightMin = self.treeMinRecursive(root.right)
+        return min(root.data, leftMin, rightMin)
+
+
 tree = TreeNode(5)
 tree.insert(4)
 tree.insert(3)
 tree.insert(7)
 tree.insert(2)
 tree.insert(6)
+tree.insert(1)
 # tree.dfsIterative(tree)
 # print(tree.dfsRecursive(tree))
 # tree.bfsIterative(tree)
 # print(tree.treeIncludesIterative(tree, 9))
 # print(tree.treeIncludesRecursive(tree, 7))
 # print(tree.treeSumIterative(tree))
-print(tree.treeSumRecursive(tree))
+# print(tree.treeSumRecursive(tree))
+# print(tree.treeMinIterative(tree))
+print(tree.treeMinRecursive(tree))
