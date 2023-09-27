@@ -93,7 +93,7 @@ class TreeNode:
     def treeMinIterative(self, root):
         smallest = math.inf
         if(root is None):
-            return 
+            return math.inf
         stack = [root]
         while(len(stack) > 0):
             curr = stack.pop(-1)
@@ -113,6 +113,13 @@ class TreeNode:
         rightMin = self.treeMinRecursive(root.right)
         return min(root.data, leftMin, rightMin)
 
+    def maxTreeSumRecursive(self, root):
+        if(root is None):
+            return -math.inf
+        if(root.left is None and root.right is None):
+            return root.data
+        maxChild = max(self.maxTreeSumRecursive(root.left), self.maxTreeSumRecursive(root.right))
+        return root.data + maxChild
 
 tree = TreeNode(5)
 tree.insert(4)
@@ -129,4 +136,5 @@ tree.insert(1)
 # print(tree.treeSumIterative(tree))
 # print(tree.treeSumRecursive(tree))
 # print(tree.treeMinIterative(tree))
-print(tree.treeMinRecursive(tree))
+# print(tree.treeMinRecursive(tree))
+print(tree.maxTreeSumRecursive(tree))
