@@ -6,7 +6,7 @@ def gridTraveler(m,n, memo={}):
         return 1
     if(m == 0 or n == 0):
         return 0
-    memo[key] = gridTraveler(m-1, n) + gridTraveler(m, n-1)
+    memo[key] = gridTraveler(m-1, n, memo) + gridTraveler(m, n-1, memo)
     return memo[key]
 
 print(gridTraveler(18, 18))
